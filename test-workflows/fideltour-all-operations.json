@@ -1,10 +1,10 @@
 {
-  "id": "hdhAllOperations",
+  "id": "fideltourAllOperations",
   "name": "HDH - All operations",
   "nodes": [
     {
       "parameters": {},
-      "id": "hdh-test-0",
+      "id": "fideltour-test-0",
       "name": "When clicking ‘Execute workflow’",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
@@ -99,7 +99,7 @@
         },
         "options": {}
       },
-      "id": "hdh-test-1",
+      "id": "fideltour-test-1",
       "name": "Config",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -123,16 +123,16 @@
           "notes": "Created by the HDH node test workflow"
         }
       },
-      "id": "hdh-test-2",
+      "id": "fideltour-test-2",
       "name": "Contact: Create",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         480,
         0
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -147,16 +147,16 @@
         "requestOptions": {},
         "contactId": "={{ $('Contact: Create').first().json.id }}"
       },
-      "id": "hdh-test-3",
+      "id": "fideltour-test-3",
       "name": "Contact: Get",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         720,
         0
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -175,16 +175,16 @@
         "limit": 5,
         "offset": 0
       },
-      "id": "hdh-test-4",
+      "id": "fideltour-test-4",
       "name": "Contact: Get Many",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         960,
         0
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -203,16 +203,16 @@
           "notes": "Updated by the HDH node test workflow"
         }
       },
-      "id": "hdh-test-5",
+      "id": "fideltour-test-5",
       "name": "Contact: Update",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         1200,
         0
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -230,16 +230,16 @@
         "sendActivationEmail": false,
         "sendWelcomeEmail": false
       },
-      "id": "hdh-test-6",
+      "id": "fideltour-test-6",
       "name": "Loyalty: Sign In",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         0,
         220
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -260,16 +260,16 @@
           "loyaltyNights": 2
         }
       },
-      "id": "hdh-test-7",
+      "id": "fideltour-test-7",
       "name": "Loyalty: Update Data",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         240,
         220
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -286,16 +286,16 @@
         "concept": "n8n test - add points",
         "points": 50
       },
-      "id": "hdh-test-8",
+      "id": "fideltour-test-8",
       "name": "Loyalty: Add Points",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         480,
         220
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -312,16 +312,16 @@
         "concept": "n8n test - redeem points",
         "points": 10
       },
-      "id": "hdh-test-9",
+      "id": "fideltour-test-9",
       "name": "Loyalty: Redeem Points",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         720,
         220
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -337,16 +337,16 @@
         "limit": 5,
         "offset": 0
       },
-      "id": "hdh-test-10",
+      "id": "fideltour-test-10",
       "name": "Loyalty: Get Operations",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         960,
         220
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -361,16 +361,16 @@
         "requestOptions": {},
         "operationId": "={{ $('Loyalty: Add Points').first().json.id }}"
       },
-      "id": "hdh-test-11",
+      "id": "fideltour-test-11",
       "name": "Loyalty: Get Operation",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         1200,
         220
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -386,16 +386,16 @@
         "email": "={{ $('Config').first().json.testEmail }}",
         "loginPassword": "={{ $('Config').first().json.loyaltyPassword }}"
       },
-      "id": "hdh-test-12",
+      "id": "fideltour-test-12",
       "name": "Loyalty: Login",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         0,
         440
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -411,16 +411,16 @@
         "contactId": "={{ $('Contact: Create').first().json.id }}",
         "newPassword": "={{ $('Config').first().json.loyaltyNewPassword }}"
       },
-      "id": "hdh-test-13",
+      "id": "fideltour-test-13",
       "name": "Loyalty: Change Password",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         240,
         440
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -435,16 +435,16 @@
         "requestOptions": {},
         "email": "={{ $('Config').first().json.testEmail }}"
       },
-      "id": "hdh-test-14",
+      "id": "fideltour-test-14",
       "name": "Loyalty: Reset Password",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         480,
         440
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -476,16 +476,16 @@
           "notes": "Created by the HDH node test workflow"
         }
       },
-      "id": "hdh-test-15",
+      "id": "fideltour-test-15",
       "name": "Movement: Create",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         720,
         440
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -500,16 +500,16 @@
         "requestOptions": {},
         "entryId": "={{ $('Movement: Create').first().json.id }}"
       },
-      "id": "hdh-test-16",
+      "id": "fideltour-test-16",
       "name": "Movement: Get",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         960,
         440
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -528,16 +528,16 @@
         "limit": 5,
         "offset": 0
       },
-      "id": "hdh-test-17",
+      "id": "fideltour-test-17",
       "name": "Movement: Get Many",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         1200,
         440
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -556,16 +556,16 @@
           "notes": "Updated by the HDH node test workflow"
         }
       },
-      "id": "hdh-test-18",
+      "id": "fideltour-test-18",
       "name": "Movement: Update",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         0,
         660
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -582,16 +582,16 @@
         "hotelId": "={{ $('Config').first().json.hotelId }}",
         "entrance": "={{ $('Config').first().json.entranceDate }}"
       },
-      "id": "hdh-test-19",
+      "id": "fideltour-test-19",
       "name": "Movement: Get by Room",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         240,
         660
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -618,16 +618,16 @@
           "acceptCommercialCommunications": true
         }
       },
-      "id": "hdh-test-20",
+      "id": "fideltour-test-20",
       "name": "Web Form: Submit",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         480,
         660
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }
@@ -642,16 +642,16 @@
         "requestOptions": {},
         "contactId": "={{ $('Contact: Create').first().json.id }}"
       },
-      "id": "hdh-test-21",
+      "id": "fideltour-test-21",
       "name": "Loyalty: Reset Account",
-      "type": "CUSTOM.hdh",
+      "type": "CUSTOM.fideltour",
       "typeVersion": 1,
       "position": [
         720,
         660
       ],
       "credentials": {
-        "hdhApi": {
+        "fideltourApi": {
           "id": "gA3oErxHB5laBTfr",
           "name": "HotelDataHub account"
         }

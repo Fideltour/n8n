@@ -4,24 +4,24 @@ import { movementDescription } from './resources/movement';
 import { loyaltyDescription } from './resources/loyalty';
 import { webFormDescription } from './resources/webForm';
 
-export class Hdh implements INodeType {
+export class Fideltour implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'HotelDataHub',
-		name: 'hdh',
-		icon: { light: 'file:../../icons/hdh.svg', dark: 'file:../../icons/hdh.dark.svg' },
+		displayName: 'Fideltour',
+		name: 'fideltour',
+		icon: { light: 'file:../../icons/fideltour.svg', dark: 'file:../../icons/fideltour.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Interact with the HotelDataHub (HDH) API by Fideltour',
+		description: 'Interact with the Fideltour HotelDataHub (HDH) API',
 		defaults: {
-			name: 'HotelDataHub',
+			name: 'Fideltour',
 		},
 		usableAsTool: true,
 		inputs: [NodeConnectionTypes.Main],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
-				name: 'hdhApi',
+				name: 'fideltourApi',
 				required: true,
 			},
 		],

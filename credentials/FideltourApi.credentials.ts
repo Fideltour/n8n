@@ -8,12 +8,12 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class HdhApi implements ICredentialType {
-	name = 'hdhApi';
+export class FideltourApi implements ICredentialType {
+	name = 'fideltourApi';
 
-	displayName = 'HotelDataHub API';
+	displayName = 'Fideltour API';
 
-	icon: Icon = { light: 'file:../icons/hdh.svg', dark: 'file:../icons/hdh.dark.svg' };
+	icon: Icon = { light: 'file:../icons/fideltour.svg', dark: 'file:../icons/fideltour.dark.svg' };
 
 	documentationUrl = 'https://app.hoteldatahub.io/api/docs/';
 

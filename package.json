@@ -1,11 +1,13 @@
 {
-    "name": "n8n-nodes-hdh",
+    "name": "n8n-nodes-fideltour",
     "version": "0.1.0",
-    "description": "n8n community node for HotelDataHub (HDH) by Fideltour: contacts, movements, loyalty, web forms and webhook triggers",
+    "description": "n8n community node for Fideltour HotelDataHub (HDH): contacts, movements, loyalty, web forms and webhook triggers",
     "license": "MIT",
     "homepage": "https://app.hoteldatahub.io/api/docs/",
     "keywords": [
-        "n8n-community-node-package"
+        "n8n-community-node-package",
+        "fideltour",
+        "hoteldatahub"
     ],
     "author": {
         "name": "Fideltour",
@@ -36,11 +38,11 @@
         "n8nNodesApiVersion": 1,
         "strict": true,
         "credentials": [
-            "dist/credentials/HdhApi.credentials.js"
+            "dist/credentials/FideltourApi.credentials.js"
         ],
         "nodes": [
-            "dist/nodes/Hdh/Hdh.node.js",
-            "dist/nodes/HdhTrigger/HdhTrigger.node.js"
+            "dist/nodes/Fideltour/Fideltour.node.js",
+            "dist/nodes/FideltourTrigger/FideltourTrigger.node.js"
         ]
     },
     "devDependencies": {

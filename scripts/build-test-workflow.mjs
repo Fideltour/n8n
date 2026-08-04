@@ -9,15 +9,15 @@
 // Tenant-specific values live in the single "Config" node so they can be
 // edited in one place.
 //
-// Usage: node scripts/build-test-workflow.mjs > test-workflows/hdh-all-operations.json
+// Usage: node scripts/build-test-workflow.mjs > test-workflows/fideltour-all-operations.json
 
 import { writeFileSync, mkdirSync } from 'node:fs';
 
 const CREDENTIALS = {
-	hdhApi: { id: 'gA3oErxHB5laBTfr', name: 'HotelDataHub account' },
+	fideltourApi: { id: 'gA3oErxHB5laBTfr', name: 'HotelDataHub account' },
 };
 
-const HDH_TYPE = 'CUSTOM.hdh';
+const HDH_TYPE = 'CUSTOM.fideltour';
 
 const cfg = (field) => `={{ $('Config').first().json.${field} }}`;
 const from = (node, field) => `={{ $('${node}').first().json.${field} }}`;
@@ -42,7 +42,7 @@ const nodes = [];
 const add = (name, type, parameters, extra = {}) => {
 	nodes.push({
 		parameters,
-		id: `hdh-test-${nodes.length}`,
+		id: `fideltour-test-${nodes.length}`,
 		name,
 		type,
 		typeVersion: extra.typeVersion ?? 1,
@@ -269,7 +269,7 @@ for (let i = 0; i < nodes.length - 1; i++) {
 const workflow = {
 	// Fixed ID so re-running this script updates the same workflow in n8n
 	// instead of creating a duplicate on every import.
-	id: 'hdhAllOperations',
+	id: 'fideltourAllOperations',
 	name: 'HDH - All operations',
 	nodes,
 	connections,
@@ -277,8 +277,8 @@ const workflow = {
 };
 
 mkdirSync('test-workflows', { recursive: true });
-writeFileSync('test-workflows/hdh-all-operations.json', JSON.stringify(workflow, null, 2));
+writeFileSync('test-workflows/fideltour-all-operations.json', JSON.stringify(workflow, null, 2));
 
 const hdhCount = nodes.filter((n) => n.type === HDH_TYPE).length;
-console.log(`Wrote test-workflows/hdh-all-operations.json`);
+console.log(`Wrote test-workflows/fideltour-all-operations.json`);
 console.log(`  ${nodes.length} nodes total, ${hdhCount} HDH operations`);

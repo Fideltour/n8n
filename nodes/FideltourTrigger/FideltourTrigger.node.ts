@@ -8,7 +8,7 @@ import {
 	type IWebhookResponseData,
 } from 'n8n-workflow';
 
-interface HdhSubscription {
+interface FideltourSubscription {
 	id: number;
 	url: string;
 	type: number;
@@ -16,14 +16,14 @@ interface HdhSubscription {
 
 const SUBSCRIPTIONS_ENDPOINT = '/api/v1/webhooks/zapier-webhooks-subscriptions/';
 
-async function hdhApiRequest(
+async function fideltourApiRequest(
 	this: IHookFunctions,
 	method: 'GET' | 'POST' | 'DELETE',
 	endpoint: string,
 	body?: IDataObject,
 ) {
-	const credentials = await this.getCredentials('hdhApi');
-	return await this.helpers.httpRequestWithAuthentication.call(this, 'hdhApi', {
+	const credentials = await this.getCredentials('fideltourApi');
+	return await this.helpers.httpRequestWithAuthentication.call(this, 'fideltourApi', {
 		method,
 		url: `${credentials.baseUrl as string}${endpoint}`,
 		body,
@@ -31,24 +31,24 @@ async function hdhApiRequest(
 	});
 }
 
-export class HdhTrigger implements INodeType {
+export class FideltourTrigger implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'HotelDataHub Trigger',
-		name: 'hdhTrigger',
-		icon: { light: 'file:../../icons/hdh.svg', dark: 'file:../../icons/hdh.dark.svg' },
+		displayName: 'Fideltour Trigger',
+		name: 'fideltourTrigger',
+		icon: { light: 'file:../../icons/fideltour.svg', dark: 'file:../../icons/fideltour.dark.svg' },
 		group: ['trigger'],
 		version: 1,
 		subtitle: '={{$parameter["event"]}}',
-		description: 'Starts the workflow when HotelDataHub events occur',
+		description: 'Starts the workflow when Fideltour (HotelDataHub) events occur',
 		defaults: {
-			name: 'HotelDataHub Trigger',
+			name: 'Fideltour Trigger',
 		},
 		usableAsTool: true,
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
-				name: 'hdhApi',
+				name: 'fideltourApi',
 				required: true,
 			},
 		],
@@ -95,10 +95,10 @@ export class HdhTrigger implements INodeType {
 				const webhookData = this.getWorkflowStaticData('node');
 
 				// The endpoint only returns the subscriptions of the authenticated API user
-				const response = await hdhApiRequest.call(this, 'GET', SUBSCRIPTIONS_ENDPOINT);
+				const response = await fideltourApiRequest.call(this, 'GET', SUBSCRIPTIONS_ENDPOINT);
 				const subscriptions = (
-					Array.isArray(response) ? response : ((response.results as HdhSubscription[]) ?? [])
-				) as HdhSubscription[];
+					Array.isArray(response) ? response : ((response.results as FideltourSubscription[]) ?? [])
+				) as FideltourSubscription[];
 
 				for (const subscription of subscriptions) {
 					if (subscription.url === webhookUrl && subscription.type === event) {
@@ -114,10 +114,10 @@ export class HdhTrigger implements INodeType {
 				const event = this.getNodeParameter('event') as number;
 				const webhookData = this.getWorkflowStaticData('node');
 
-				const subscription = (await hdhApiRequest.call(this, 'POST', SUBSCRIPTIONS_ENDPOINT, {
+				const subscription = (await fideltourApiRequest.call(this, 'POST', SUBSCRIPTIONS_ENDPOINT, {
 					url: webhookUrl,
 					type: event,
-				})) as HdhSubscription;
+				})) as FideltourSubscription;
 
 				webhookData.subscriptionId = subscription.id;
 				return true;
@@ -130,7 +130,7 @@ export class HdhTrigger implements INodeType {
 				}
 
 				try {
-					await hdhApiRequest.call(
+					await fideltourApiRequest.call(
 						this,
 						'DELETE',
 						`${SUBSCRIPTIONS_ENDPOINT}${webhookData.subscriptionId as number}/`,

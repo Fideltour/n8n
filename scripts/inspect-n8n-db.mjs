@@ -27,7 +27,7 @@ for (const w of db.prepare('SELECT id, name, active, nodes FROM workflow_entity'
 		console.log(
 			`      - ${n.name} (${n.type})${detail ? '  ' + detail : ''}${creds ? '  [' + creds + ']' : ''}`,
 		);
-		if (n.type.includes('hdh')) console.log(`        params: ${JSON.stringify(p)}`);
+		if (n.type.includes('fideltour')) console.log(`        params: ${JSON.stringify(p)}`);
 	}
 }
 
