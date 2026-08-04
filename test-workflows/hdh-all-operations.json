@@ -1,0 +1,900 @@
+{
+  "id": "hdhAllOperations",
+  "name": "HDH - All operations",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "hdh-test-0",
+      "name": "When clicking ‘Execute workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cfg-0",
+              "name": "hotelChain",
+              "value": "REPLACE_ME",
+              "type": "string"
+            },
+            {
+              "id": "cfg-1",
+              "name": "hotelId",
+              "value": 0,
+              "type": "number"
+            },
+            {
+              "id": "cfg-2",
+              "name": "apiUser",
+              "value": "REPLACE_ME",
+              "type": "string"
+            },
+            {
+              "id": "cfg-3",
+              "name": "companyId",
+              "value": 0,
+              "type": "number"
+            },
+            {
+              "id": "cfg-4",
+              "name": "roomNumber",
+              "value": "101",
+              "type": "string"
+            },
+            {
+              "id": "cfg-5",
+              "name": "testEmail",
+              "value": "=n8n-test-{{ $now.toMillis() }}@example.com",
+              "type": "string"
+            },
+            {
+              "id": "cfg-6",
+              "name": "webFormEmail",
+              "value": "=n8n-webform-{{ $now.toMillis() }}@example.com",
+              "type": "string"
+            },
+            {
+              "id": "cfg-7",
+              "name": "loyaltyPassword",
+              "value": "N8nTest!2026",
+              "type": "string"
+            },
+            {
+              "id": "cfg-8",
+              "name": "loyaltyNewPassword",
+              "value": "N8nTest!2026b",
+              "type": "string"
+            },
+            {
+              "id": "cfg-9",
+              "name": "localizer",
+              "value": "=N8NTEST-{{ $now.toMillis() }}",
+              "type": "string"
+            },
+            {
+              "id": "cfg-10",
+              "name": "movementDate",
+              "value": "={{ $now.toFormat(\"yyyy-MM-dd'T'HH:mm:ss\") }}",
+              "type": "string"
+            },
+            {
+              "id": "cfg-11",
+              "name": "entranceDate",
+              "value": "={{ $now.plus({ days: 7 }).toFormat('yyyy-MM-dd') }}",
+              "type": "string"
+            },
+            {
+              "id": "cfg-12",
+              "name": "departureDate",
+              "value": "={{ $now.plus({ days: 9 }).toFormat('yyyy-MM-dd') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "hdh-test-1",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "contact",
+        "operation": "create",
+        "requestOptions": {},
+        "email": "={{ $('Config').first().json.testEmail }}",
+        "source": 21,
+        "additionalFields": {
+          "name": "N8N",
+          "surname": "Test Contact",
+          "language": "es",
+          "country": "ES",
+          "notes": "Created by the HDH node test workflow"
+        }
+      },
+      "id": "hdh-test-2",
+      "name": "Contact: Create",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "contact",
+        "operation": "get",
+        "requestOptions": {},
+        "contactId": "={{ $('Contact: Create').first().json.id }}"
+      },
+      "id": "hdh-test-3",
+      "name": "Contact: Get",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        720,
+        0
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "contact",
+        "operation": "getAll",
+        "requestOptions": {},
+        "filters": {
+          "email": "={{ $('Config').first().json.testEmail }}"
+        },
+        "limit": 5,
+        "offset": 0
+      },
+      "id": "hdh-test-4",
+      "name": "Contact: Get Many",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        960,
+        0
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "contact",
+        "operation": "update",
+        "requestOptions": {},
+        "contactId": "={{ $('Contact: Create').first().json.id }}",
+        "updateFields": {
+          "name": "N8N Updated",
+          "notes": "Updated by the HDH node test workflow"
+        }
+      },
+      "id": "hdh-test-5",
+      "name": "Contact: Update",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        0
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "signIn",
+        "requestOptions": {},
+        "contactId": "={{ $('Contact: Create').first().json.id }}",
+        "password": "={{ $('Config').first().json.loyaltyPassword }}",
+        "sendActivationEmail": false,
+        "sendWelcomeEmail": false
+      },
+      "id": "hdh-test-6",
+      "name": "Loyalty: Sign In",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        0,
+        220
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "updateData",
+        "requestOptions": {},
+        "contactId": "={{ $('Contact: Create').first().json.id }}",
+        "loyaltyFields": {
+          "points": 100,
+          "levelPoints": 50,
+          "loyaltyBookings": 1,
+          "loyaltyNights": 2
+        }
+      },
+      "id": "hdh-test-7",
+      "name": "Loyalty: Update Data",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        240,
+        220
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "addPoints",
+        "requestOptions": {},
+        "contact": "={{ $('Contact: Create').first().json.id }}",
+        "concept": "n8n test - add points",
+        "points": 50
+      },
+      "id": "hdh-test-8",
+      "name": "Loyalty: Add Points",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        480,
+        220
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "redeemPoints",
+        "requestOptions": {},
+        "contact": "={{ $('Contact: Create').first().json.id }}",
+        "concept": "n8n test - redeem points",
+        "points": 10
+      },
+      "id": "hdh-test-9",
+      "name": "Loyalty: Redeem Points",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        720,
+        220
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "getOperations",
+        "requestOptions": {},
+        "limit": 5,
+        "offset": 0
+      },
+      "id": "hdh-test-10",
+      "name": "Loyalty: Get Operations",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        960,
+        220
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "getOperation",
+        "requestOptions": {},
+        "operationId": "={{ $('Loyalty: Add Points').first().json.id }}"
+      },
+      "id": "hdh-test-11",
+      "name": "Loyalty: Get Operation",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        220
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "login",
+        "requestOptions": {},
+        "email": "={{ $('Config').first().json.testEmail }}",
+        "loginPassword": "={{ $('Config').first().json.loyaltyPassword }}"
+      },
+      "id": "hdh-test-12",
+      "name": "Loyalty: Login",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        0,
+        440
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "changePassword",
+        "requestOptions": {},
+        "contactId": "={{ $('Contact: Create').first().json.id }}",
+        "newPassword": "={{ $('Config').first().json.loyaltyNewPassword }}"
+      },
+      "id": "hdh-test-13",
+      "name": "Loyalty: Change Password",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        240,
+        440
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "resetPassword",
+        "requestOptions": {},
+        "email": "={{ $('Config').first().json.testEmail }}"
+      },
+      "id": "hdh-test-14",
+      "name": "Loyalty: Reset Password",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        480,
+        440
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "movement",
+        "operation": "create",
+        "requestOptions": {},
+        "hotelChain": "={{ $('Config').first().json.hotelChain }}",
+        "contact": "={{ $('Contact: Create').first().json.id }}",
+        "hotel": "={{ $('Config').first().json.hotelId }}",
+        "date": "={{ $('Config').first().json.movementDate }}",
+        "entrance": "={{ $('Config').first().json.entranceDate }}",
+        "departure": "={{ $('Config').first().json.departureDate }}",
+        "localizer": "={{ $('Config').first().json.localizer }}",
+        "additionalFields": {
+          "roomNumber": "={{ $('Config').first().json.roomNumber }}",
+          "adults": 2,
+          "currency": "EUR",
+          "amount": 250,
+          "inputChannel": 5,
+          "status": 1,
+          "subStatus": 2,
+          "notes": "Created by the HDH node test workflow"
+        }
+      },
+      "id": "hdh-test-15",
+      "name": "Movement: Create",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        720,
+        440
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "movement",
+        "operation": "get",
+        "requestOptions": {},
+        "entryId": "={{ $('Movement: Create').first().json.id }}"
+      },
+      "id": "hdh-test-16",
+      "name": "Movement: Get",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        960,
+        440
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "movement",
+        "operation": "getAll",
+        "requestOptions": {},
+        "filters": {
+          "localizer": "={{ $('Config').first().json.localizer }}"
+        },
+        "limit": 5,
+        "offset": 0
+      },
+      "id": "hdh-test-17",
+      "name": "Movement: Get Many",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        440
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "movement",
+        "operation": "update",
+        "requestOptions": {},
+        "entryId": "={{ $('Movement: Create').first().json.id }}",
+        "updateFields": {
+          "adults": 3,
+          "notes": "Updated by the HDH node test workflow"
+        }
+      },
+      "id": "hdh-test-18",
+      "name": "Movement: Update",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        0,
+        660
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "movement",
+        "operation": "getByRoom",
+        "requestOptions": {},
+        "roomNumber": "={{ $('Config').first().json.roomNumber }}",
+        "hotelId": "={{ $('Config').first().json.hotelId }}",
+        "entrance": "={{ $('Config').first().json.entranceDate }}"
+      },
+      "id": "hdh-test-19",
+      "name": "Movement: Get by Room",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        240,
+        660
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "webForm",
+        "operation": "submit",
+        "requestOptions": {},
+        "hotelChain": "={{ $('Config').first().json.hotelChain }}",
+        "email": "={{ $('Config').first().json.webFormEmail }}",
+        "apiUser": "={{ $('Config').first().json.apiUser }}",
+        "companyId": "={{ $('Config').first().json.companyId }}",
+        "source": 6,
+        "additionalFields": {
+          "name": "N8N",
+          "surname": "Web Form Test",
+          "country": "ES",
+          "language": "es",
+          "acceptTerms": true,
+          "acceptCommercialCommunications": true
+        }
+      },
+      "id": "hdh-test-20",
+      "name": "Web Form: Submit",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        480,
+        660
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "loyalty",
+        "operation": "resetAccount",
+        "requestOptions": {},
+        "contactId": "={{ $('Contact: Create').first().json.id }}"
+      },
+      "id": "hdh-test-21",
+      "name": "Loyalty: Reset Account",
+      "type": "CUSTOM.hdh",
+      "typeVersion": 1,
+      "position": [
+        720,
+        660
+      ],
+      "credentials": {
+        "hdhApi": {
+          "id": "gA3oErxHB5laBTfr",
+          "name": "HotelDataHub account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true,
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Contact: Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact: Create": {
+      "main": [
+        [
+          {
+            "node": "Contact: Get",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact: Get": {
+      "main": [
+        [
+          {
+            "node": "Contact: Get Many",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact: Get Many": {
+      "main": [
+        [
+          {
+            "node": "Contact: Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact: Update": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Sign In",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Sign In": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Update Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Update Data": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Add Points",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Add Points": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Redeem Points",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Redeem Points": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Get Operations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Get Operations": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Get Operation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Get Operation": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Login",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Login": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Change Password",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Change Password": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Reset Password",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loyalty: Reset Password": {
+      "main": [
+        [
+          {
+            "node": "Movement: Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Movement: Create": {
+      "main": [
+        [
+          {
+            "node": "Movement: Get",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Movement: Get": {
+      "main": [
+        [
+          {
+            "node": "Movement: Get Many",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Movement: Get Many": {
+      "main": [
+        [
+          {
+            "node": "Movement: Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Movement: Update": {
+      "main": [
+        [
+          {
+            "node": "Movement: Get by Room",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Movement: Get by Room": {
+      "main": [
+        [
+          {
+            "node": "Web Form: Submit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Web Form: Submit": {
+      "main": [
+        [
+          {
+            "node": "Loyalty: Reset Account",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -1,0 +1,56 @@
+{
+    "name": "n8n-nodes-hdh",
+    "version": "0.1.0",
+    "description": "n8n community node for HotelDataHub (HDH) by Fideltour: contacts, movements, loyalty, web forms and webhook triggers",
+    "license": "MIT",
+    "homepage": "https://app.hoteldatahub.io/api/docs/",
+    "keywords": [
+        "n8n-community-node-package"
+    ],
+    "author": {
+        "name": "Fideltour",
+        "email": "jorgeasoler2015@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Fideltour/n8n.git"
+    },
+    "engines": {
+        "node": ">=20.15"
+    },
+    "scripts": {
+        "build": "n8n-node build",
+        "build:watch": "tsc --watch",
+        "dev": "n8n-node dev",
+        "dev:node": "n8n-node dev --external-n8n",
+        "dev:n8n": "powershell -ExecutionPolicy Bypass -File ./scripts/dev-n8n.ps1",
+        "lint": "n8n-node lint",
+        "lint:fix": "n8n-node lint --fix",
+        "release": "n8n-node release",
+        "prepublishOnly": "n8n-node prerelease"
+    },
+    "files": [
+        "dist"
+    ],
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "strict": true,
+        "credentials": [
+            "dist/credentials/HdhApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/Hdh/Hdh.node.js",
+            "dist/nodes/HdhTrigger/HdhTrigger.node.js"
+        ]
+    },
+    "devDependencies": {
+        "@n8n/node-cli": "*",
+        "eslint": "9.32.0",
+        "prettier": "3.6.2",
+        "release-it": "^19.0.4",
+        "typescript": "5.9.2"
+    },
+    "peerDependencies": {
+        "n8n-workflow": "*"
+    }
+}
