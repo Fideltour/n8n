@@ -135,7 +135,10 @@ export class FideltourTrigger implements INodeType {
 						'DELETE',
 						`${SUBSCRIPTIONS_ENDPOINT}${webhookData.subscriptionId as number}/`,
 					);
-				} catch {
+				} catch (error) {
+					this.logger.warn(
+						`Failed to delete Fideltour webhook subscription ${webhookData.subscriptionId as number}: ${(error as Error).message}`,
+					);
 					return false;
 				}
 
