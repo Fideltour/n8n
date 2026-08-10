@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Loyalty · Add Points: send the required `point_type` field (the API rejected add-points requests without it)
+
 ## 0.1.0 (2026-08-05)
 
 Initial release.

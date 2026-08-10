@@ -342,6 +342,19 @@ export const loyaltyDescription: INodeProperties[] = [
 		description: 'Points to add or subtract',
 		routing: { send: { type: 'body', property: 'points' } },
 	},
+	// The add-points endpoint rejects requests without point_type
+	{
+		displayName: 'Point Type',
+		name: 'pointType',
+		type: 'number',
+		default: 0,
+		required: true,
+		displayOptions: {
+			show: { ...showOnlyForLoyalty, operation: ['addPoints'] },
+		},
+		description: 'Type of the points operation in HDH (e.g. 0 for regular points)',
+		routing: { send: { type: 'body', property: 'point_type' } },
+	},
 
 	// ---------- loyalty:getOperation ----------
 	{
