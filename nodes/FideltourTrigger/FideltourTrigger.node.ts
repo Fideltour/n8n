@@ -31,6 +31,9 @@ async function fideltourApiRequest(
 	});
 }
 
+// Trigger nodes cannot be invoked as AI tools, and the INodeTypeDescription
+// type only allows `usableAsTool: true`, so the property must be omitted here.
+// eslint-disable-next-line @n8n/community-nodes/node-usable-as-tool
 export class FideltourTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Fideltour Trigger',
@@ -43,10 +46,6 @@ export class FideltourTrigger implements INodeType {
 		defaults: {
 			name: 'Fideltour Trigger',
 		},
-		// Trigger nodes cannot be invoked as AI tools. The property is kept
-		// explicitly set to false because the lint ruleset requires it to be
-		// present, while the verification scanner rejects it being true.
-		usableAsTool: false,
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [
