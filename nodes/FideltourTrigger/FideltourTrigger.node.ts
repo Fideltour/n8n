@@ -43,6 +43,10 @@ export class FideltourTrigger implements INodeType {
 		defaults: {
 			name: 'Fideltour Trigger',
 		},
+		// Trigger nodes cannot be invoked as AI tools. The property is kept
+		// explicitly set to false because the lint ruleset requires it to be
+		// present, while the verification scanner rejects it being true.
+		usableAsTool: false,
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [
