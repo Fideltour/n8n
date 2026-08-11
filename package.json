@@ -1,6 +1,6 @@
 {
     "name": "n8n-nodes-fideltour",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "n8n community node for Fideltour HotelDataHub (HDH): contacts, movements, loyalty, web forms and webhook triggers",
     "license": "MIT",
     "homepage": "https://app.hoteldatahub.io/api/docs/",
@@ -11,7 +11,7 @@
     ],
     "author": {
         "name": "Fideltour",
-        "email": "jorgeasoler2015@gmail.com"
+        "email": "jsoler@fideltour.com"
     },
     "repository": {
         "type": "git",

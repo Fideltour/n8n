@@ -43,7 +43,6 @@ export class FideltourTrigger implements INodeType {
 		defaults: {
 			name: 'Fideltour Trigger',
 		},
-		usableAsTool: true,
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [
