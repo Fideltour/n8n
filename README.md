@@ -123,12 +123,12 @@ Paste this into an n8n canvas to get the workflow above:
 Use the **Fideltour Trigger** node with the **Contact Created** event to start a
 workflow every time a contact is created in HotelDataHub. The node registers the
 webhook in HDH automatically when the workflow is activated, and removes it when
-the workflow is deactivated. A common follow-up is to add points with the
-**Loyalty → Add Points** operation as a welcome bonus:
+the workflow is deactivated. A common follow-up is to enroll the new contact in
+the loyalty program with the **Loyalty → Sign In** operation:
 
 ```json
 {
-  "name": "Fideltour - Welcome bonus",
+  "name": "Fideltour - Loyalty enrollment",
   "nodes": [
     {
       "parameters": { "event": 5 },
@@ -141,21 +141,21 @@ the workflow is deactivated. A common follow-up is to add points with the
     {
       "parameters": {
         "resource": "loyalty",
-        "operation": "addPoints",
-        "contact": "={{ $json.id }}",
-        "concept": "Welcome bonus",
-        "points": 100
+        "operation": "signIn",
+        "contactId": "={{ $json.id }}",
+        "password": "ChangeMe-123",
+        "sendWelcomeEmail": true
       },
       "type": "n8n-nodes-fideltour.fideltour",
       "typeVersion": 1,
       "position": [220, 0],
-      "name": "Add Welcome Points",
+      "name": "Loyalty Sign In",
       "credentials": { "fideltourApi": { "name": "Fideltour API" } }
     }
   ],
   "connections": {
     "Fideltour Trigger": {
-      "main": [[{ "node": "Add Welcome Points", "type": "main", "index": 0 }]]
+      "main": [[{ "node": "Loyalty Sign In", "type": "main", "index": 0 }]]
     }
   }
 }
